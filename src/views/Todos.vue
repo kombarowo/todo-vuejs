@@ -1,9 +1,16 @@
 <template>
-  <div id="app">
-    <h1>Todo app</h1>
+  <div>
+    <h2>Todo app</h2>
+    <router-link to="/">Home</router-link>
     <hr>
-
-    <RouterView/>
+    <AddTodo
+        v-on:add-todo="addTodo"
+    />
+    <hr>
+    <ToDoList
+        v-bind:todos="todos"
+        v-on:remove-todo="removeTodo"
+    />
   </div>
 </template>
 
@@ -37,14 +44,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
