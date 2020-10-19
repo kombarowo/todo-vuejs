@@ -7,28 +7,38 @@
         v-on:add-todo="addTodo"
     />
     <hr>
+    <Loader v-if="loading"/>
     <ToDoList
+        v-else-if="todos.length"
         v-bind:todos="todos"
         v-on:remove-todo="removeTodo"
     />
+    <p v-else>No todos!</p>
   </div>
 </template>
 
 <script>
 import ToDoList from '@/components/TodoList';
 import AddTodo from '@/components/AddTodo';
+import Loader from '@/components/Loader';
 
 export default {
   name: 'App',
   data() {
     return {
-      todos: []
+      todos: [],
+      loading: true
     }
   },
   mounted() {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=4')
         .then(response => response.json())
-        .then(json => this.todos = json)
+        .then(json => {
+          setTimeout(() => {
+            this.todos = json
+            this.loading = false;
+          }, 500);
+        })
   },
   methods: {
     removeTodo(id) {
@@ -39,8 +49,9 @@ export default {
     }
   },
   components: {
+    Loader,
     AddTodo,
-    ToDoList
+    ToDoList,
   }
 }
 </script>
