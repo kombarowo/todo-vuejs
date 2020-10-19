@@ -34,6 +34,7 @@ li {
   border: 1px solid gray;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
 }

@@ -20,13 +20,13 @@ export default {
   name: 'App',
   data() {
     return {
-      todos: [
-        {id: 1, title: 'Проснуться', completed: false},
-        {id: 2, title: 'Умыться', completed: false},
-        {id: 3, title: 'Поесть', completed: false},
-        {id: 4, title: 'Лечь спать', completed: false},
-      ]
+      todos: []
     }
+  },
+  mounted() {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+        .then(response => response.json())
+        .then(json => this.todos = json)
   },
   methods: {
     removeTodo(id) {
